@@ -1,0 +1,2 @@
+# docker build -t myowrx .
+# docker run --rm --name owrx -p 8073:8073 -e TZ=UTC -v "$(pwd)":/src -e OPENWEBRX_ADMIN_USER=admin -e OPENWEBRX_ADMIN_PASSWORD=a myowrx

@@ -8,6 +8,14 @@ var mapSources = [
         },
     },
     {
+        name: 'YourCustomTileserver',
+        url: '{customserveraddr}/{z}/{x}/{y}.png',
+        options: {
+            maxZoom: 19,
+            attribution: 'placeholder2'
+        },
+    },
+    {
         name: 'OpenTopoMap',
         url: 'https://{s}.tile.opentopomap.org/{z}/{x}/{y}.png',
         options: {
@@ -244,7 +252,7 @@ MapManager.prototype.removeReceiver = function() {
     if (receiverMarker) receiverMarker.setMap();
 }
 
-MapManager.prototype.initializeMap = async function(receiver_gps, api_key, weather_key) {
+MapManager.prototype.initializeMap = async function(receiver_gps, api_key, weather_key, customserveraddr) {
     if (map) {
         receiverMarker.setLatLng(receiver_gps.lat, receiver_gps.lon);
         receiverMarker.setMarkerOptions(this.config);
@@ -334,6 +342,9 @@ MapManager.prototype.initializeMap = async function(receiver_gps, api_key, weath
         var apiKeys = {};
         if (weather_key) {
             apiKeys['weather_key'] = weather_key;
+        }
+        if (customserveraddr) {
+            apiKeys['customserveraddr'] = customserveraddr;
         }
 
         function isMapEligible (m) {
